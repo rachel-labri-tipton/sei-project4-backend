@@ -62,11 +62,21 @@ class LoginView(generics.GenericAPIView):
     #     }, status=status.HTTP_200_OK)
 
 
+class ProfileView(generics.ListCreateAPIView):
+    queryset = CommunityUser.objects.all()
+    serializer_class = UserSerializer
+
+
+class ProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CommunityUser.objects.all()
+    serializer_class = UserSerializer
+
+
 class IsAuthorView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CommunityUser.objects.filter(is_author=True)
+    queryset = CommunityUser.objects.all()
     serializer_class = IsAuthorSerializer
 
 
 class IsAuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CommunityUser.objects.filter(is_author=True)
+    queryset = CommunityUser.objects.all()
     serializer_class = IsAuthorSerializer
