@@ -7,18 +7,18 @@ from users.models import CommunityUser
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('name', )
+        fields = ("name", )
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = ('username',)
+        fields = ("username",)
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
-    author = AuthorSerializer()
+    author_name = AuthorSerializer()
 
     class Meta:
         model = BlogPost
@@ -27,37 +27,34 @@ class BlogPostSerializer(serializers.ModelSerializer):
     def create(self, data):
         author_data = data.pop("author_name")
         category_data = data.pop("category")
-
+        # blogpost = BlogPost(**data)
         blogpost = BlogPost(
-            title=data['title']
-            # excerpt=data['excerpt']
-            # excerpt=data['excerpt']
-            # content=data['content']
-            # status=data['status']
-            # slug=data['slug']
-            # excerpt=data['excerpt']
-            # content=data['content']
-            # status=data['status']
-            # slug=data['slug'])
+            title=data['title'],
+            excerpt=data['excerpt'],
+            content=data['content'],
+            status=data['status'],
+            slug=data['slug']
+        )
 
         if author_data:
-            author, _created=CommunityUser.objects.get_or_create(
+            author, _created = CommunityUser.objects.get_or_create(
                 **author_data)
-            blogpost.author=author
+            blogpost.author = author
 
-        request=self.context.get("request")
+        request = self.context.get("request")
         if request and hasattr(request, "user"):
-            blogpost.creator=request.user
+            blogpost.creator = request.user
 
         blogpost.save()
 
         if category_data:
             for name in category_data:
-                newCategory, _created=Category.objects.get_or_create(**name)
+                newCategory, _created = Category.objects.get_or_create(**name)
                 blogpost.categories.add(newCategory)
 
+        return blogpost
 
-# def update(self, book, data):
+# def update(self, blogpost, data):
     # author_data = data.pop("author")
     # location_data = data.pop("locations")
 

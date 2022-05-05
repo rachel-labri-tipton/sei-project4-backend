@@ -1,3 +1,4 @@
+from xml.dom import ValidationErr
 from rest_framework import serializers
 from users.models import CommunityUser
 from rest_framework.validators import UniqueValidator
@@ -69,6 +70,9 @@ class LoginSerializer(serializers.ModelSerializer):
 
 
 class IsAuthorSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = CommunityUser
         fields = ('username', 'is_author')
+    
+

@@ -34,9 +34,6 @@ class BlogPost(models.Model):
     categories = models.ManyToManyField(
         Category, related_name='article_categories', blank=True)
 
-    slug = models.SlugField(
-        max_length=250, null=True)
-
     status = models.CharField(
         max_length=10, choices=OPTIONS, default='draft')
 
