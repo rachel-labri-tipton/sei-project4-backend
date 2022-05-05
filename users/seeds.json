@@ -1,0 +1,68 @@
+[
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "username": "User2",
+      "password": "password2",
+      "first_name": "Susan",
+      "last_name": "Smith",
+      "email": "susan@gmail.com"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "username": "User3",
+      "password": "password3",
+      "first_name": "Harriet",
+      "last_name": "Smith",
+      "email": "harriet@gmail.com"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "username": "User4",
+      "password": "password4",
+      "first_name": "Kristen",
+      "last_name": "Smith",
+      "email": "kristen@gmail.com"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "username": "User5",
+      "password": "password5",
+      "first_name": "Leslie",
+      "last_name": "Smith",
+      "email": "leslie@gmail.com"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 8,
+    "fields": {
+      "username": "User8",
+      "password": "password6",
+      "first_name": "Amanda",
+      "last_name": "Smith",
+      "email": "amanda@gmail.com"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 7,
+    "fields": {
+      "username": "User7",
+      "password": "password6",
+      "first_name": "Virginia",
+      "last_name": "Smith",
+      "email": "inia@gmail.com"
+    }
+  }
+]
