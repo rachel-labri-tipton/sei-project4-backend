@@ -12,6 +12,8 @@ psycopg2 = "^2.9.3"
 Pillow = "^9.1.0"
 django-summernote = "^0.8.20"
 djangorestframework-simplejwt = "^5.1.0"
+cors = "^1.0.1"
+django-cors-headers = "^3.11.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
