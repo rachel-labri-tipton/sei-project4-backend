@@ -13,32 +13,32 @@ class CategorySerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = ("username",)
+        fields = ("first_name", "last_name", "id",)
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
-    author_name = AuthorSerializer()
+    author = AuthorSerializer()
 
     class Meta:
         model = BlogPost
         fields = '__all__'
 
     def create(self, data):
-        author_data = data.pop("author_name")
-        category_data = data.pop("category")
+        author_data = data.pop("author")
+        category_data = data.pop("categories")
         # blogpost = BlogPost(**data)
         blogpost = BlogPost(
             title=data['title'],
             excerpt=data['excerpt'],
             content=data['content'],
             status=data['status'],
-            slug=data['slug']
         )
 
         if author_data:
-            author, _created = CommunityUser.objects.get_or_create(
-                **author_data)
+            author = CommunityUser.objects.get(
+                first_name=author_data["first_name"]
+            )
             blogpost.author = author
 
         request = self.context.get("request")

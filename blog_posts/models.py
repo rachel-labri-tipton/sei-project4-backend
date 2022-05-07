@@ -23,7 +23,7 @@ class BlogPost(models.Model):
 
     excerpt = models.TextField(null=True)
 
-    author_name = models.ForeignKey(
+    author = models.ForeignKey(
         CommunityUser, on_delete=models.CASCADE, related_name='author_details', null=True)
 
     # author_bio = models.ForeignKey(

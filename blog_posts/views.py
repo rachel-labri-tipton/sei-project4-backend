@@ -9,7 +9,7 @@ from blog_posts.models import BlogPost
 from .serializers import BlogPostSerializer
 
 
-class BlogPostListView(generics.ListAPIView):
+class BlogPostListView(generics.ListCreateAPIView):
     permission_classes = [AllowAny]
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer

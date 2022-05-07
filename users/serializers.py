@@ -10,11 +10,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
         fields = ('username', 'first_name',
-                  'last_name', 'password', 'password_repeat', 'email', 'profile_image', 'is_author', 'is_communityleader')
+                  'last_name', 'password', 'password_repeat', 'email', 'is_author', 'is_communityleader')
 
         extra_kwargs = {
             'first_name': {'required': True},
-            'last_name': {'required': True}
+            'last_name': {'required': True},
+            'username': {'required': True},
+            'email': {'required': True}
         }
 
     email = serializers.EmailField(
@@ -46,8 +48,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name=data['first_name'],
             last_name=data[
                 'last_name'],
-            email=data['email'],
-            profile_image=data['profile_image']
+            email=data['email']
 
         )
 
@@ -55,6 +56,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         # save serialized user to DB
         user.save()
+
+        return user
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -74,5 +77,3 @@ class IsAuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
         fields = ('username', 'is_author')
-    
-

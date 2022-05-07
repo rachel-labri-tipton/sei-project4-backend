@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from users.models import CommunityUser
 from users.serializers import IsAuthorSerializer, LoginSerializer, UserSerializer, RegisterSerializer
 import jwt
@@ -16,6 +16,7 @@ import jwt
 
 
 class RegisterView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     queryset = CommunityUser.objects.all()
     serializer_class = RegisterSerializer
 
