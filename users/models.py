@@ -10,5 +10,5 @@ class CommunityUser(AbstractUser):
     profile_image = models.ImageField(null=True)
     # community_groups=models.ManyToManyField()
     bio = models.TextField(null=True, default=False)
-    is_author = models.BooleanField(default=False)
+    is_staff_writer = models.BooleanField(default=False)
     is_communityleader = models.BooleanField(default=False)

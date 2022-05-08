@@ -43,7 +43,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
         request = self.context.get("request")
         if request and hasattr(request, "user"):
-            blogpost.creator = request.user
+            blogpost.author = request.user
 
         blogpost.save()
 
@@ -54,27 +54,29 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
         return blogpost
 
-# def update(self, blogpost, data):
-    # author_data = data.pop("author")
-    # location_data = data.pop("locations")
+    def update(self, blogpost, data):
+        author_data = data.pop("author")
+        category_data = data.pop("categories")
 
-    # book.title = data.get("title", book.title)
-    #  book.rating = data.get("rating", book.rating)
-    #   book.year_of_publication = data.get(
-    #        "year_of_publication", book.year_of_publication)
+        blogpost.title = data.get("title", blogpost.title)
+        blogpost.excerpt = data.get("excerpt", blogpost.excerpt)
+        blogpost.content = data.get(
+            "content", blogpost.content)
+        blogpost.status = data.get("status", blogpost.status)
 
-    #    if author_data:
-    #         author, _created = Author.objects.get_or_create(**author_data)
-    #         book.author = author
+        if author_data:
+            author, _created = CommunityUser.objects.get(
+                first_name=author_data["first_name"])
+            blogpost.author = author
 
-    #     if location_data:
-    #         for location in location_data:
-    #             newLocation, _created = Location.objects.get_or_create(
-    #                 **location)
-    #             book.locations.add(newLocation)
+        if category_data:
+            for name in category_data:
+                newCategory, _created = Category.objects.get_or_create(
+                    **name)
+            blogpost.locations.add(newCategory)
 
-    #     # save to the database
-    #     book.save()
+        # save to the database
+        # blogpost.save()
 
-    #     # render to the api
-    #     return book
+        # render to the api
+        return blogpost

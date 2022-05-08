@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'blog_posts',
-    'blog_categories'
+    'blog_categories',
+    'blog_comments'
 ]
 
 MIDDLEWARE = [
