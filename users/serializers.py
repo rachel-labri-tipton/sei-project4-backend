@@ -10,7 +10,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
         fields = ('username', 'first_name',
-                  'last_name', 'password', 'password_repeat', 'email', 'is_author', 'is_communityleader')
+                  'last_name', 'password', 'password_repeat', 'email', 'is_staff_writer', 'is_communityleader')
 
         extra_kwargs = {
             'first_name': {'required': True},
@@ -76,4 +76,4 @@ class IsAuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityUser
-        fields = ('username', 'is_author')
+        fields = ('username', 'is_staff_writer')

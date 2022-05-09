@@ -8,7 +8,8 @@ from datetime import datetime, timedelta
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from backend.permissions import IsAuthor
 from users.models import CommunityUser
 from users.serializers import IsAuthorSerializer, LoginSerializer, UserSerializer, RegisterSerializer
 import jwt
@@ -63,17 +64,19 @@ class LoginView(generics.GenericAPIView):
     #     }, status=status.HTTP_200_OK)
 
 
-class ProfileView(generics.ListCreateAPIView):
+class ProfileView(generics.ListAPIView):
     queryset = CommunityUser.objects.all()
     serializer_class = UserSerializer
 
 
 class ProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permmission_classes = [IsAuthor | IsAdminUser]
     queryset = CommunityUser.objects.all()
     serializer_class = UserSerializer
 
 
 class IsAuthorView(generics.RetrieveUpdateDestroyAPIView):
+
     queryset = CommunityUser.objects.all()
     serializer_class = IsAuthorSerializer
 
