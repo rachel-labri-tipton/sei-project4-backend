@@ -11,7 +11,7 @@ from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from backend.permissions import IsAuthor
 from users.models import CommunityUser
-from users.serializers import IsAuthorSerializer, LoginSerializer, UserSerializer, RegisterSerializer
+from users.serializers import IsAuthorSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer
 import jwt
 # Create your views here.
 
@@ -69,10 +69,15 @@ class ProfileView(generics.ListAPIView):
     serializer_class = UserSerializer
 
 
-class ProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permmission_classes = [IsAuthor | IsAdminUser]
+class ProfileDetailView(generics.RetrieveAPIView):
     queryset = CommunityUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = ProfileSerializer
+
+
+class ProfileUpdateDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permmission_classes = [IsAdminUser | IsAuthor]
+    queryset = CommunityUser.objects.all()
+    serializer_class = ProfileSerializer
 
 
 class IsAuthorView(generics.RetrieveUpdateDestroyAPIView):
