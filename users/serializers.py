@@ -78,6 +78,30 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             'email': {'required': True}
         }
 
+    def validate(self, attrs):
+        request = self.context.get("request")
+        username = self.context.get("username")
+        print(self)
+        print("attributes", attrs)
+        if request and hasattr(request, "user"):
+            if attrs['username'] != request.user.username:
+                raise serializers.ValidationError({
+                    "not_user": "Woops! What are you doing here? Onl the person who made this profile can update it."
+                })
+
+        print("attributes", attrs)
+
+        return attrs
+#
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            if not request.user.is_premium:
+                raise serializers.ValidationError({
+                    "is_premium": "Only premium users can create and update books."
+                })
+
+        return attrs
+
     def update(self, userprofile, data):
 
         userprofile.username = data.get("username", userprofile.username)
@@ -86,6 +110,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
         userprofile.last_name = data.get(
             "last_name", userprofile.last_name)
         userprofile.email = data.get("email", userprofile.email)
+        userprofile.bio = data.get("bio", userprofile.bio)
 
     # save to the database
         userprofile.save()

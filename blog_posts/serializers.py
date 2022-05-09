@@ -22,7 +22,8 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = '__all__'
+        fields = ('categories', 'author', 'title',
+                  'excerpt', 'content', 'status')
 
     def create(self, data):
         author_data = data.pop("author")
@@ -76,7 +77,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
             blogpost.locations.add(newCategory)
 
         # save to the database
-        # blogpost.save()
+        blogpost.save()
 
         # render to the api
         return blogpost
