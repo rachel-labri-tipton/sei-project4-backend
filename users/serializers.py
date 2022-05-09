@@ -3,6 +3,7 @@ from rest_framework import serializers
 from users.models import CommunityUser
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from rest_framework.permissions import IsAdminUser
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -56,18 +57,19 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         user.set_password(data['password'])
 
+        user.set_creator(data['username'])
         # save serialized user to DB
         user.save()
 
         return user
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class ProfileEditSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityUser
         fields = ('username', 'first_name',
-                  'last_name', 'email', 'bio', 'is_staff_writer', 'is_communityleader')
+                  'last_name', 'email', 'bio',)
 
         extra_kwargs = {
             'first_name': {'required': True},
@@ -84,10 +86,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         userprofile.last_name = data.get(
             "last_name", userprofile.last_name)
         userprofile.email = data.get("email", userprofile.email)
-        userprofile.is_staff_writer = data.get(
-            "is_staff_writer", userprofile.is_staff_writer)
-        userprofile.is_communityleader = data.get(
-            "is_communityleader", userprofile.is_communityleader)
 
     # save to the database
         userprofile.save()
@@ -99,17 +97,11 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = '__all__'
+        fields = ('username', 'first_name',
+                  'last_name', 'bio', 'profile_image')
 
 
 class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
         fields = ('username', 'password')
-
-
-class IsAuthorSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = CommunityUser
-        fields = ('username', 'is_staff_writer')

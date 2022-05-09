@@ -1,11 +1,12 @@
 from rest_framework import permissions
 
 
-class IsAuthor(permissions.BasePermission):
-    message = 'You have to be the author in order to change this article.'
+class IsLoggedInUser(permissions.BasePermission):
 
-    def has_object_permission(self, request, view, obj):
-        return obj.creator == request.user
+    def has_object_permissions(self, request, view, obj):
+        message = 'You are not allowed to update this profile.'
+
+        return obj.username == request.username
 
 
 class IsStaffWriter(permissions.BasePermission):

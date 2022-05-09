@@ -10,12 +10,11 @@ from .serializers import BlogPostSerializer
 
 
 class BlogPostListView(generics.ListAPIView):
-    permission_classes = [AllowAny]
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
 
-class BlogPostDetailView(generics.GenericAPIView):
+class BlogPostDetailView(generics.RetrieveAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
