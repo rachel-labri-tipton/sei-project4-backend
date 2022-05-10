@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_summernote',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_summernote',
     'corsheaders',
     'users',
     'blog_posts',
@@ -71,7 +71,7 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TEMPLATES = [
     {

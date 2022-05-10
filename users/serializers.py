@@ -49,15 +49,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name=data['first_name'],
             last_name=data[
                 'last_name'],
-            is_staff_writer=data['is_staff_writer'],
-            is_communityleader=data['is_communityleader'],
             email=data['email']
 
         )
 
         user.set_password(data['password'])
 
-        user.set_creator(data['username'])
         # save serialized user to DB
         user.save()
 

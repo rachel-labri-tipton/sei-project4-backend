@@ -1,8 +1,7 @@
 from django.db import models
 from blog_categories.models import Category
-
 from users.models import CommunityUser
-
+import media
 
 # Create your models here.
 
@@ -17,7 +16,8 @@ class BlogPost(models.Model):
     # categories = models.ManyToManyField(
     #     Category, blank=True,  related_name="blog_posts")
 
-    image = models.ImageField(null=True)
+    image = models.ImageField(
+        default="/media/undraw_super_woman_dv0y_GTj3dqq.jpg")
 
     title = models.CharField(max_length=200, unique=True)
 
@@ -25,9 +25,6 @@ class BlogPost(models.Model):
 
     author = models.ForeignKey(
         CommunityUser, on_delete=models.CASCADE, related_name='author_details', null=True)
-
-    # author_bio = models.ForeignKey(
-    #     CommunityUser, on_delete=models.CASCADE, related_name='user_bio', null=True)
 
     content = models.TextField()
 

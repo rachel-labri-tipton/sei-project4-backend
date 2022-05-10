@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+from requests import Response
 from rest_framework import serializers
 from blog_comments.models import Comment
 
@@ -16,7 +18,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    blogosts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    blogposts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
@@ -30,3 +32,14 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'body', 'user', 'blogpost']
+
+    def destroy(self, request, attrs):
+        request = self.context.get("request")
+        if request.user.username != attrs['user']:
+            raise serializers.ValidationError({
+                "You can only delete comments that you made."
+            })
+        comment_id = self.kwargs['comment_id']
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment.delete()
+        return Response(status=204)

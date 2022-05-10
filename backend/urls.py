@@ -34,3 +34,5 @@ urlpatterns = [
     path('blogcategories/', include('blog_categories.urls')),
     path('comments/', include('blog_comments.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

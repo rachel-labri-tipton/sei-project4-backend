@@ -13,7 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = ('first_name', 'last_name', 'id', 'username',
+        fields = ('first_name', 'last_name', 'username', 'id',
                   'profile_image',)
 
         def validate(self, attrs):
@@ -35,6 +35,16 @@ class BlogPostSerializer(serializers.ModelSerializer):
         model = BlogPost
         fields = ('categories', 'author', 'title',
                   'excerpt', 'content', 'status')
+
+    def validate(self, attrs):
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            if request.user.is_staff_writer == False:
+                raise serializers.ValidationError(
+                    {"message": "Only Staff Writers can post or update an article."}
+                )
+
+        return attrs
 
     def create(self, data):
         author_data = data.pop("author")
@@ -72,14 +82,12 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
         # check who the author is
         request = self.context.get("request")
-        if author_data:
-            if author_data['first_name'] != request.user.first_name:
-                print(author_data)
-                raise serializers.ValidationError({
-                    "message": "You must be the author of this article to update it."
-                })
-            if request and hasattr(request, "user"):
-                blogpost.author = request.user
+        username = self.context.get("username")
+        if author_data['username'] != request.user.username:
+            print(author_data)
+            raise serializers.ValidationError({
+                "message": "You must be the author of this article to update it."
+            })
 
         if category_data:
             for name in category_data:
