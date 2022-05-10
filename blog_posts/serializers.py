@@ -13,7 +13,18 @@ class CategorySerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = ("first_name", "last_name", "id",)
+        fields = ('first_name', 'last_name', 'id', 'username',
+                  'profile_image',)
+
+        def validate(self, attrs):
+            request = self.context.get("request")
+            if request and hasattr(request, "user"):
+                if request.user.is_staff_writer == False:
+                    raise serializers.ValidationError(
+                        {"message": "Only Staff Writers can post or update an article."}
+                    )
+
+            return attrs
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
@@ -36,15 +47,10 @@ class BlogPostSerializer(serializers.ModelSerializer):
             status=data['status'],
         )
 
-        if author_data:
-            author = CommunityUser.objects.get(
-                first_name=author_data["first_name"]
-            )
-            blogpost.author = author
-
         request = self.context.get("request")
         if request and hasattr(request, "user"):
-            blogpost.author = request.user
+            author = request.user
+            blogpost.author = author
 
         blogpost.save()
 
@@ -58,23 +64,28 @@ class BlogPostSerializer(serializers.ModelSerializer):
     def update(self, blogpost, data):
         author_data = data.pop("author")
         category_data = data.pop("categories")
-
         blogpost.title = data.get("title", blogpost.title)
         blogpost.excerpt = data.get("excerpt", blogpost.excerpt)
         blogpost.content = data.get(
             "content", blogpost.content)
         blogpost.status = data.get("status", blogpost.status)
 
+        # check who the author is
+        request = self.context.get("request")
         if author_data:
-            author, _created = CommunityUser.objects.get(
-                first_name=author_data["first_name"])
-            blogpost.author = author
+            if author_data['first_name'] != request.user.first_name:
+                print(author_data)
+                raise serializers.ValidationError({
+                    "message": "You must be the author of this article to update it."
+                })
+            if request and hasattr(request, "user"):
+                blogpost.author = request.user
 
         if category_data:
             for name in category_data:
                 newCategory, _created = Category.objects.get_or_create(
                     **name)
-            blogpost.locations.add(newCategory)
+            blogpost.categories.add(newCategory)
 
         # save to the database
         blogpost.save()

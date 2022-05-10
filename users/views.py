@@ -40,3 +40,5 @@ class ProfileUpdateDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsLoggedInUser]
     queryset = CommunityUser.objects.all()
     serializer_class = ProfileEditSerializer
+
+    

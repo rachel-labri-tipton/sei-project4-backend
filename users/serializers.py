@@ -81,26 +81,25 @@ class ProfileEditSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         request = self.context.get("request")
         username = self.context.get("username")
-        print(self)
         print("attributes", attrs)
         if request and hasattr(request, "user"):
             if attrs['username'] != request.user.username:
                 raise serializers.ValidationError({
-                    "not_user": "Woops! What are you doing here? Onl the person who made this profile can update it."
+                    "not_user": "Woops! What are you doing here? Only the person who made this profile can update it."
                 })
 
         print("attributes", attrs)
 
         return attrs
 #
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            if not request.user.is_premium:
-                raise serializers.ValidationError({
-                    "is_premium": "Only premium users can create and update books."
-                })
+        # request = self.context.get("request")
+        # if request and hasattr(request, "user"):
+        #     if not request.user.is_premium:
+        #         raise serializers.ValidationError({
+        #             "is_premium": "Only premium users can create and update books."
+        #         })
 
-        return attrs
+        # return attrs
 
     def update(self, userprofile, data):
 

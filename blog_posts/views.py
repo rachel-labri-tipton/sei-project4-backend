@@ -10,25 +10,12 @@ from .serializers import BlogPostSerializer
 
 
 class BlogPostListView(generics.ListCreateAPIView):
-    permission_classes = [IsStaffWriter]
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
 
-class BlogPostDetailView(generics.RetrieveAPIView):
+class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
 # to creat a blogpos the user must be a staff writer or an admin user
-
-
-class BlogPostCreateView(generics.ListCreateAPIView):
-    permission_classes = [IsStaffWriter | IsAdminUser]
-    queryset = BlogPost.objects.all()
-    serializer_class = BlogPostSerializer
-
-
-class BlogPostCreateView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsStaffWriter | IsAdminUser]
-    queryset = BlogPost.objects.all()
-    serializer_class = BlogPostSerializer
