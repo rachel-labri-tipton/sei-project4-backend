@@ -10,7 +10,8 @@ from users.models import CommunityUser
 class BlogPostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(
         source='author.first_name + author.last_name')
-    comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    comments = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field="title")
 
     class Meta:
         model = BlogPost
@@ -35,7 +36,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def destroy(self, request, attrs):
         request = self.context.get("request")
-        if request.user.username != attrs['user']:
+        if request.user != attrs['user']:
             raise serializers.ValidationError({
                 "You can only delete comments that you made."
             })

@@ -13,7 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = ('first_name', 'last_name', 'username', 'id',
+        fields = ('first_name', 'last_name', 'id', 'username',
                   'profile_image',)
 
         def validate(self, attrs):
@@ -47,7 +47,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, data):
-        author_data = data.pop("author")
+        # author_data = data.pop("author")
         category_data = data.pop("categories")
         # blogpost = BlogPost(**data)
         blogpost = BlogPost(
