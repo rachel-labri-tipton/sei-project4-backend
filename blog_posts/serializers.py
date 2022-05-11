@@ -13,8 +13,9 @@ class CategorySerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunityUser
-        fields = ('first_name', 'last_name', 'id', 'username',
-                  'profile_image',)
+        fields = ('first_name', 'last_name', 'id', 'profile_image', 'bio')
+        # fields = ('first_name', 'last_name', 'id', 'username',
+        #           'profile_image',)
 
         def validate(self, attrs):
             request = self.context.get("request")
@@ -47,7 +48,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, data):
-        # author_data = data.pop("author")
+        author_data = data.pop("author")
         category_data = data.pop("categories")
         # blogpost = BlogPost(**data)
         blogpost = BlogPost(
@@ -57,10 +58,15 @@ class BlogPostSerializer(serializers.ModelSerializer):
             status=data['status'],
         )
 
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            author = request.user
+        if author_data:
+            author = CommunityUser.objects.get(
+                first_name=author_data["first_name"])
             blogpost.author = author
+
+        # request = self.context.get("request")
+        # if request and hasattr(request, "user"):
+        #     author = request.user
+        #     blogpost.author = author
 
         blogpost.save()
 
