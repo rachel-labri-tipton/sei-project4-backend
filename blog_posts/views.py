@@ -22,18 +22,7 @@ class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
-    def destroy(self, request):
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            if request.user.is_staff_writer == False:
-                raise serializers.ValidationError(
-                    {"message": "Only Staff Writers can post or update an article."}
-                )
-        print("request", request.user.username)
-        blogpost = self.get_object()
-        self.perform_destroy(blogpost)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
+    
 
 class BlogPostStaffWriterView(generics.ListAPIView):
     serializer_class = BlogPostSerializer
