@@ -1,4 +1,6 @@
-from rest_framework import serializers
+
+from rest_framework.response import Response
+from rest_framework import serializers, status
 from blog_categories.models import Category
 from blog_posts.models import BlogPost
 from users.models import CommunityUser
@@ -35,7 +37,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPost
         fields = ('categories', 'author', 'title',
-                  'excerpt', 'content', 'status')
+                  'excerpt', 'content', 'status', 'id')
 
     def validate(self, attrs):
         request = self.context.get("request")
@@ -88,9 +90,8 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
         # check who the author is
         request = self.context.get("request")
-        username = self.context.get("username")
-        if author_data['username'] != request.user.username:
-            print(author_data)
+        if author_data['first_name'] != request.user.first_name:
+            print(author_data, request.user)
             raise serializers.ValidationError({
                 "message": "You must be the author of this article to update it."
             })
@@ -106,3 +107,12 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
         # render to the api
         return blogpost
+
+    # def destroy(self, request, *args, **kwargs):
+    #     blogpost = self.get_object()
+    #     # if blogpost:
+    #     #     raise serializers.ValidationError(
+    #     #         {"message": "Only Staff Writers can post or update an article."}
+    #     #     )
+    #     self.perform_destroy(blogpost)
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
