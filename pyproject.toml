@@ -7,6 +7,14 @@ authors = ["Rachel Tipton <RACHELMTIPTON@GMAIL.COM>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 Django = "^4.0.4"
+djangorestframework = "^3.13.1"
+psycopg2 = "^2.9.3"
+Pillow = "^9.1.0"
+django-summernote = "^0.8.20"
+djangorestframework-simplejwt = "^5.1.0"
+cors = "^1.0.1"
+django-cors-headers = "^3.11.0"
+django-filter = "^21.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
