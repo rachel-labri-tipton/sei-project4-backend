@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_summernote',
+    'dj_database_url',
     'corsheaders',
     'users',
     'blog_posts',
