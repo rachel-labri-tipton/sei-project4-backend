@@ -1,69 +1,20 @@
 [
-  {
-    "model": "blog_posts.blogpost",
-    "pk": 1,
-    "fields": {
-      "title": "back again saying Here",
-      "excerpt": "stand still the trees ahead and bushes beside you are not lost",
-      "content": "stand still the trees ahead and bushes beside you are not lost. wherever you are is called here, and you must treat it as a powerful stranger, must ask permission to know it and be known. the forest breathes. listen. it answers, i have made this place around you. if you leave it, you may come back again saying Here. no two trees are the same to Raven. No two branches are the same to Wrten. If what  a tree or a bush does is lost on you, you are surely lost. Stand still. the forest knows where you are. you must let it find you.",
-      "status": "published",
-      "slug": "something",
-      "author_name": {
-        "username": "communityadvocate"
-      },
-      "category": {
-        "name": "new"
-      }
-    }
-  },
-  {
-    "model": "blog_posts.blogpost",
-    "pk": 2,
-    "fields": {
-      "title": "know it and be known",
-      "excerpt": "stand still the trees ahead and bushes beside you are not lost",
-      "content": "stand still the trees ahead and bushes beside you are not lost. wherever you are is called here, and you must treat it as a powerful stranger, must ask permission to know it and be known. the forest breathes. listen. it answers, i have made this place around you. if you leave it, you may come back again saying Here. no two trees are the same to Raven. No two branches are the same to Wrten. If what  a tree or a bush does is lost on you, you are surely lost. Stand still. the forest knows where you are. you must let it find you.",
-      "status": "published",
-      "slug": "something",
-      "author_name": {
-        "username": "communityadvocate"
-      },
-      "categories": {
-        "name": "new"
-      }
-    }
-  },
-  {
-    "model": "blog_posts.blogpost",
-    "pk": 3,
-    "fields": {
-      "title": "the forest breathes",
-      "excerpt": "stand still the trees ahead and bushes beside you are not lost",
-      "content": "stand still the trees ahead and bushes beside you are not lost. wherever you are is called here, and you must treat it as a powerful stranger, must ask permission to know it and be known. the forest breathes. listen. it answers, i have made this place around you. if you leave it, you may come back again saying Here. no two trees are the same to Raven. No two branches are the same to Wrten. If what  a tree or a bush does is lost on you, you are surely lost. Stand still. the forest knows where you are. you must let it find you.",
-      "status": "published",
-      "slug": "something",
-      "author_name": {
-        "username": "communityadvocate"
-      },
-      "category": {
-        "name": "new"
-      }
-    }
-  },
-  {
-    "model": "blog_posts.blogpost",
-    "pk": 4,
-    "fields": {
-      "title": "you are surely lost",
-      "excerpt": "stand still the trees ahead and bushes beside you are not lost",
-      "content": "stand still the trees ahead and bushes beside you are not lost. wherever you are is called here, and you must treat it as a powerful stranger, must ask permission to know it and be known. the forest breathes. listen. it answers, i have made this place around you. if you leave it, you may come back again saying Here. no two trees are the same to Raven. No two branches are the same to Wrten. If what  a tree or a bush does is lost on you, you are surely lost. Stand still. the forest knows where you are. you must let it find you.",
-      "slug": "something",
-      "author_name": {
-        "username": "communityadvocate"
-      },
-      "category": {
-        "name": "new"
-      }
-    }
+{
+  "model": "blog_posts.blogpost",
+  "pk": 44,
+  "fields": {
+    "image": "undraw_walking_around_25f5_Aazi4wp.jpg",
+    "title": "The Kingfisher",
+    "excerpt": "<p><span style=\"color: rgb(0, 0, 0); font-family: Arial; font-size: 13px;\">&nbsp;think this is</span><br style=\"color: rgb(0, 0, 0); font-family: Arial; font-size: 13px;\"><span style=\"color: rgb(0, 0, 0); font-family: Arial; font-size: 13px;\">the prettiest world--so long as you don't mind</span><br style=\"color: rgb(0, 0, 0); font-family: Arial; font-size: 13px;\"><span style=\"color: rgb(0, 0, 0); font-family: Arial; font-size: 13px;\">a little dying...</span><br></p>",
+    "author": 1,
+    "content": "<div align=\"left\" style=\"color: rgb(0, 0, 0); font-family: Tahoma; font-size: 11px; padding-left: 14px; padding-top: 13px;\"><br></div><div style=\"color: rgb(0, 0, 0); padding-left: 14px; padding-top: 20px; font-family: Arial; font-size: 13px;\">The kingfisher rises out of the black wave<br>like a blue flower, in his beak<br>he carries a silver leaf. I think this is<br>the prettiest world--so long as you don't mind<br>a little dying, how could there be a day in your<br>whole life<br>that doesn't have its splash of happiness?<br>There are more fish than there are leaves<br>on a thousand trees, and anyway the kingfisher<br>wasn't born to think about it, or anything else.<br>When the wave snaps shut over his blue head, the<br>water<br>remains water--hunger is the only story<br>he has ever heard in his life that he could<br>believe.<br>I don't say he's right. Neither<br>do I say he's wrong. Religiously he swallows the<br>silver leaf<br>with its broken red river, and with a rough and<br>easy cry<br>I couldn't rouse out of my thoughtful body<br>if my life depended on it, he swings back<br>over the bright sea to do the same thing, to do it<br>(as I long to do something, anything) perfectly.</div>",
+    "status": "published",
+    "created_on": "2022-05-13T10:15:29.924Z",
+    "updated_on": "2022-05-13T10:37:05.695Z",
+    "categories": [
+      11,
+      12
+    ]
   }
+}
 ]

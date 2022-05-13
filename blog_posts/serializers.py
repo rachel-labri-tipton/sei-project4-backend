@@ -36,7 +36,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ('categories', 'author', 'title',
+        fields = ('categories', 'author', 'title', 'image',
                   'excerpt', 'content', 'status', 'id')
 
     def validate(self, attrs):
