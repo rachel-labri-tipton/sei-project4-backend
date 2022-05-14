@@ -85,7 +85,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://627f9953888930630f082230--capable-bunny-0040ae.netlify.app'
+    'https://capable-bunny-0040ae.netlify.app'
 
 ]
 
