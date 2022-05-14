@@ -77,7 +77,7 @@ ROOT_URLCONF = 'backend.urls'
 
 
 ACCESS_CONTROL_ALLOW_ORIGIN = [
-    'https://627e8654ed6cdf00a4a901ba--sei-community-project.netlify.app/']
+]
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -90,7 +90,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://627e8654ed6cdf00a4a901ba--sei-community-project.netlify.app/'
+    'https://sei-community-project.netlify.app'
+
 ]
 
 MEDIA_URL = '/media/'
