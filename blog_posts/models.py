@@ -16,7 +16,7 @@ class BlogPost(models.Model):
     # categories = models.ManyToManyField(
     #     Category, blank=True,  related_name="blog_posts")
 
-    image = models.TextField(max_length=200)
+    image = models.CharField(max_length=200, null=True)
 
     title = models.CharField(max_length=200, unique=True)
 
