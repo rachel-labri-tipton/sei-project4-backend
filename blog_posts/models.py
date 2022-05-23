@@ -16,8 +16,8 @@ class BlogPost(models.Model):
     # categories = models.ManyToManyField(
     #     Category, blank=True,  related_name="blog_posts")
 
-    image = models.ImageField(
-        default="/media/undraw_super_woman_dv0y_GTj3dqq.jpg")
+    image = models.CharField(
+        max_length=200, null=True)
 
     title = models.CharField(max_length=200, unique=True)
 
